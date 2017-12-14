@@ -49,7 +49,7 @@ nav:nth-child(1) {
 
 .imageForm {
     border: 2px solid #33cc3b;
-    height: 35px;
+    height: auto;
     width: 700px;
     margin-top:0px;
     padding-top:10px;
@@ -63,12 +63,7 @@ nav:nth-child(1) {
     width: 75px;
     margin-left: 10px;
     font-size: 1.2em;
-    float: left;
     color: white;
-}
-
-.imageForm input[type=text] {
-    float:left;
 }
 
 .makeImageSubmit {
@@ -176,46 +171,38 @@ nav:nth-child(1) {
     font-weight: bold;
     color: red;
     font-style: italic;
+    text-align: center;
 }
 
-#image {
-    z-index: 225;
-    margin-top: -20px;
-    margin-left: 135px;
-    height: 450px;
-    width: 300px;
-    -ms-transform: rotate(330deg);
-    -webkit-transform: rotate(330deg); 
-    transform: rotate(330deg);
+#premiumUser {
+    float: right;
 }
 
 #images {
     width: 40%;
     min-width: 400px;
-    border: 2px solid #55ee62;
     border-radius: 4px;
     margin: 0 auto;
     margin-top: 100px;
 }
 
 .image {
-    width: 95%;
+    width: 20%;
     margin: 0 auto;
     margin-top: 2px;
     margin-bottom: 2px;
     border: 2px solid #55ee62;
     border-radius: 4px;
-    background-color: #55ee62;
     padding: 10px;
     min-height:60px;
     overflow: hidden;
+    float: left;
 }
 
 .image:hover {
     transition: border-color 0.2s ease-out;
-    border-color: rgba(255,255,255, 0.8);
+    border-color: #28b0c2;
     transition: background-color 2.6s ease-out;
-    background-color: #66ffb3;
 }
 
 h3.emptyimages {

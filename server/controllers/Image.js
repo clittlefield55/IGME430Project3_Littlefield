@@ -14,15 +14,17 @@ const imagePage = (req, res) => {
 };
 
 const makeImage = (req, res) => {
-  if (!req.body.image || !req.body.name) {
+  if (!req.body.desc || !req.body.name) {
     return res.status(400).json({ error: 'Sorry, but the image and name fields are required' });
   }
 
   const imageData = {
-    image: req.body.image,
+    image: 'blank image',
     name: req.body.name,
+    description: req.body.desc,
     rating: 0,
-    user: req.session.account._id,
+    user: req.session.account.username,
+    userId: req.session.account._id,
   };
 
   const newImage = new Image.ImageModel(imageData);
@@ -34,6 +36,19 @@ const makeImage = (req, res) => {
   return imagePromise;
 };
 
+const getImages = (request, response) => {
+  const req = request;
+  const res = response;
+
+  return Image.ImageModel.find({}, (err, docs) => {
+    if (err) {
+      return res.status(400).json({ error: 'An error occurred' });
+    }
+
+    return res.json({ images: docs });
+  });
+};
+
 const getUserSpecificImages = (request, response) => {
   const req = request;
   const res = response;
@@ -43,10 +58,11 @@ const getUserSpecificImages = (request, response) => {
       return res.status(400).json({ error: 'An error occurred' });
     }
 
-    return res.json({ domos: docs });
+    return res.json({ images: docs });
   });
 };
 
 module.exports.imagePage = imagePage;
+module.exports.getImages = getImages;
 module.exports.getUserSpecificImages = getUserSpecificImages;
 module.exports.make = makeImage;

@@ -11,13 +11,15 @@ const setName = (name) => _.escape(name).trim();
 
 const ImageSchema = new mongoose.Schema({
   image: {
+    // data: Buffer,
+    // contentType: String,
     type: String,
     required: true,
   },
 
   name: {
     type: String,
-    required: false,
+    required: true,
   },
 
   rating: {
@@ -28,10 +30,15 @@ const ImageSchema = new mongoose.Schema({
 
   description: {
     type: String,
-    required: false,
+    required: true,
   },
 
   user: {
+    type: String,
+    required: true,
+  },
+
+  userId: {
     type: mongoose.Schema.ObjectId,
     required: true,
     ref: 'Account',
@@ -47,15 +54,16 @@ ImageSchema.statics.toAPI = (doc) => ({
   image: doc.image,
   name: doc.name,
   rating: 0,
+  user: doc.user,
   desciption: doc.desciption,
 });
 
 ImageSchema.statics.findByOwner = (ownerId, callback) => {
   const search = {
-    owner: convertId(ownerId),
+    userId: convertId(ownerId),
   };
 
-  return ImageModel.find(search).select('name description _id').exec(callback);
+  return ImageModel.find(search).select('name description user').exec(callback);
 };
 
 ImageModel = mongoose.model('Image', ImageSchema);

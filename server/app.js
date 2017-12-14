@@ -10,6 +10,7 @@ const expressHandlebars = require('express-handlebars');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const url = require('url');
+const multer = require('multer');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
@@ -63,16 +64,24 @@ app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/../views`);
 app.disable('x-powered-by');
 app.use(cookieParser());
+/*
+app.use(multer({ dest: `${__dirname}/../uploads/`,
+  rename: function (fieldname, filename) {
+    return filename;
+  },
+ }));
 
 // csrf must come AFTER app.use(cookieParser());
 // and app.use(session({ ....... });
 // should come BEFORE the router
+/*
 app.use((err, req, res, next) => {
   if (err.code !== 'EBADCSRFTOKEN') return next(err);
 
   console.log('Missing CSRF token');
   return false;
 });
+*/
 
 router(app);
 
